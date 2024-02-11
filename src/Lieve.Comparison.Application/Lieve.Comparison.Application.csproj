@@ -7,11 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     </ItemGroup>
     
     <ItemGroup>
       <ProjectReference Include="..\Lieve.Comparison.Domain\Lieve.Comparison.Domain.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Airports\Queries\" />
     </ItemGroup>
 
 </Project>
