@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34526.213
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8D8FC565-8EB2-44E4-AC91-FE51E0976795}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1C18AB64-EAD6-4397-8B5A-37D40B0EE8CB}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Application", "src\Lieve.Comparison.Application\Lieve.Comparison.Application.csproj", "{D98354D0-E4A2-4691-A934-21EF95B99927}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Core", "src\Lieve.Comparison.Core\Lieve.Comparison.Core.csproj", "{A99988DD-E6DF-4D40-AF48-F90AC401F7E9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Infrastructure", "src\Lieve.Comparison.Infrastructure\Lieve.Comparison.Infrastructure.csproj", "{E28CDF50-2042-4A7D-8889-303C3C39DE04}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8D8FC565-8EB2-44E4-AC91-FE51E0976795}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.WebUi", "src\Lieve.Comparison.WebUi\Lieve.Comparison.WebUi.csproj", "{2F9815EB-57A2-45DE-9CE9-679F7EC41F8F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1C18AB64-EAD6-4397-8B5A-37D40B0EE8CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.WebUi.Client", "src\Lieve.Comparison.WebUi.Client\Lieve.Comparison.WebUi.Client.csproj", "{4E49F86F-1678-47A1-A077-68E41A955B4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,14 @@ Global
 		{E28CDF50-2042-4A7D-8889-303C3C39DE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E28CDF50-2042-4A7D-8889-303C3C39DE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E28CDF50-2042-4A7D-8889-303C3C39DE04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F9815EB-57A2-45DE-9CE9-679F7EC41F8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F9815EB-57A2-45DE-9CE9-679F7EC41F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F9815EB-57A2-45DE-9CE9-679F7EC41F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F9815EB-57A2-45DE-9CE9-679F7EC41F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E49F86F-1678-47A1-A077-68E41A955B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E49F86F-1678-47A1-A077-68E41A955B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E49F86F-1678-47A1-A077-68E41A955B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E49F86F-1678-47A1-A077-68E41A955B4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +51,8 @@ Global
 		{D98354D0-E4A2-4691-A934-21EF95B99927} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
 		{A99988DD-E6DF-4D40-AF48-F90AC401F7E9} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
 		{E28CDF50-2042-4A7D-8889-303C3C39DE04} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
+		{2F9815EB-57A2-45DE-9CE9-679F7EC41F8F} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
+		{4E49F86F-1678-47A1-A077-68E41A955B4A} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78DC0924-45B6-418B-BABE-488B8CD6E0A5}
