@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using Lieve.Comparison.Core.Entities;
+﻿using Lieve.Comparison.Core.Entities;
+using Lieve.Comparison.Core.Enums;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -27,18 +27,20 @@ public class GetAirportsHandler : IRequestHandler<GetAirports.Request, GetAirpor
             Builders<Airport>.Filter.Regex(x => x.City.DisplayNames.Select(s => s.Value), new BsonRegularExpression(request.Clause, "i")),
             Builders<Airport>.Filter.Regex(x => x.City.Country.DisplayNames.Select(s => s.Value), new BsonRegularExpression(request.Clause, "i"))
         );
-        
-        filter &= request.IsDomestic is true 
-            ? filterBuilder.Eq(x => x.City.Country.Code, iranCode)
-            : filterBuilder.Ne(x => x.City.Country.Code, iranCode);
-        
+
+        filter &= request.LocalityType switch
+        {
+            LocalityType.Domestic => filterBuilder.Eq(x => x.City.Country.Code, iranCode),
+            LocalityType.International => filterBuilder.Ne(x => x.City.Country.Code, iranCode),
+            _ => filterBuilder.Empty
+        };
+
         var airports = await _mongoCollection
             .Find(filter)
             .SortByDescending(x => x.IsPopular)
             .Limit(10)
             .ToListAsync(cancellationToken);
-        // var airports = await _mongoCollection.Find(x => x.IsPopular == true).ToListAsync(cancellationToken);
-
+        
         var airportsDtos = AirportDto.MapFrom(airports).ToList();
         
         return new GetAirports.Response(airportsDtos);

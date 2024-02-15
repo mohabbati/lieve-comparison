@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Lieve.Comparison.WebUi.Client\Lieve.Comparison.WebUi.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
 </Project>

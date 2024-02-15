@@ -16,11 +16,8 @@ public static class ConfigureInfrastructure
 
     private static void AddMongoCollection<T>(this IServiceCollection services, IConfiguration configuration, string collectionName)
     {
-        //var connectionString = configuration.GetSection("MongoSettings:ConnectionString").Value;
-        //var databaseName = configuration.GetSection("MongoSettings:DatabaseName").Value;
-
-        var connectionString = "mongodb://localhost:27017";
-        var databaseName = "LieveDb";
+        var connectionString = configuration.GetSection("MongoSettings:ConnectionString").Value;
+        var databaseName = configuration.GetSection("MongoSettings:DatabaseName").Value;
 
         ArgumentNullException.ThrowIfNull(connectionString, nameof(connectionString));
         ArgumentNullException.ThrowIfNull(databaseName, nameof(databaseName));

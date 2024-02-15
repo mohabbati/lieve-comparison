@@ -1,5 +1,4 @@
 ﻿@page "/weather"
-@attribute [StreamRendering]
 
 <PageTitle>Weather</PageTitle>
 
@@ -7,7 +6,10 @@
 
 <p>This component demonstrates showing data.</p>
 
-@if (forecasts == null)
+<Lieve.Comparison.WebUi.Client.Components.AirportSearch @rendermode="InteractiveAuto" />
+
+
+@* @if (forecasts == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -62,3 +64,4 @@ else
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
 }
+ *@
