@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using Lieve.Comparison.Domain.Entities;
+using Lieve.Comparison.Core.Entities;
 using MongoDB.Bson;
 using MongoDB.Driver;
 

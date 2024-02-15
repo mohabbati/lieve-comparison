@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 
-namespace Lieve.Comparison.Domain.Entities;
+namespace Lieve.Comparison.Core.Entities;
 
 public class Airport
 {

@@ -1,4 +1,4 @@
-﻿using Lieve.Comparison.Domain.Entities;
+﻿using Lieve.Comparison.Core.Entities;
 
 namespace Lieve.Comparison.Application.Airports.Queries.GetAirports;
 
