@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Lieve.Comparison.Application;
 
-public static class Configurations
+public static class ConfigureApplication
 {
-    public static IServiceCollection ConfigureApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

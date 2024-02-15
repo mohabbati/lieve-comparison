@@ -1,12 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.Application", "src\Lieve.Comparison.Application\Lieve.Comparison.Application.csproj", "{D98354D0-E4A2-4691-A934-21EF95B99927}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34526.213
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Application", "src\Lieve.Comparison.Application\Lieve.Comparison.Application.csproj", "{D98354D0-E4A2-4691-A934-21EF95B99927}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.Domain", "src\Lieve.Comparison.Domain\Lieve.Comparison.Domain.csproj", "{A99988DD-E6DF-4D40-AF48-F90AC401F7E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Core", "src\Lieve.Comparison.Core\Lieve.Comparison.Core.csproj", "{A99988DD-E6DF-4D40-AF48-F90AC401F7E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.Infrastructure", "src\Lieve.Comparison.Infrastructure\Lieve.Comparison.Infrastructure.csproj", "{E28CDF50-2042-4A7D-8889-303C3C39DE04}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.WebUi", "src\Lieve.Comparison.WebUi\Lieve.Comparison.WebUi.csproj", "{C3DD62F3-072D-4EBF-8E03-00746C214B71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Infrastructure", "src\Lieve.Comparison.Infrastructure\Lieve.Comparison.Infrastructure.csproj", "{E28CDF50-2042-4A7D-8889-303C3C39DE04}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8D8FC565-8EB2-44E4-AC91-FE51E0976795}"
 EndProject
@@ -30,15 +31,16 @@ Global
 		{E28CDF50-2042-4A7D-8889-303C3C39DE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E28CDF50-2042-4A7D-8889-303C3C39DE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E28CDF50-2042-4A7D-8889-303C3C39DE04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C3DD62F3-072D-4EBF-8E03-00746C214B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3DD62F3-072D-4EBF-8E03-00746C214B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3DD62F3-072D-4EBF-8E03-00746C214B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3DD62F3-072D-4EBF-8E03-00746C214B71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D98354D0-E4A2-4691-A934-21EF95B99927} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
 		{A99988DD-E6DF-4D40-AF48-F90AC401F7E9} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
 		{E28CDF50-2042-4A7D-8889-303C3C39DE04} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
-		{C3DD62F3-072D-4EBF-8E03-00746C214B71} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78DC0924-45B6-418B-BABE-488B8CD6E0A5}
 	EndGlobalSection
 EndGlobal
