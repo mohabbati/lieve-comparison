@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AddApplication()
     .AddInfrastructure(builder.Configuration)
-    .AddLieveClients(new Uri("http://localhost:5006/"));
+    .AddLieveHttpClients(new Uri("http://localhost:5006/"));
 
 var app = builder.Build();
 

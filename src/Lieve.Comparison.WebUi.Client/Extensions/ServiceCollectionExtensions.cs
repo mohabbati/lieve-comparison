@@ -5,7 +5,7 @@ namespace Lieve.Comparison.WebUi.Client.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddLieveClients(this IServiceCollection services, Uri baseAddress)
+    public static IServiceCollection AddLieveHttpClients(this IServiceCollection services, Uri baseAddress)
     {
         services.AddHttpClient<IAirportClient, AirportClient>(httpClient =>
         {

@@ -3,6 +3,6 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-builder.Services.AddLieveClients(new Uri(builder.HostEnvironment.BaseAddress));
+builder.Services.AddLieveHttpClients(new Uri(builder.HostEnvironment.BaseAddress));
 
 await builder.Build().RunAsync();
