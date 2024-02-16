@@ -1,9 +1,10 @@
 ﻿using Lieve.Comparison.Core.Entities;
-using Lieve.Comparison.Core.Enums;
+using Lieve.Comparison.Core.Shared.Enums;
+using Lieve.Comparison.Core.Shared.Models.Airports;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Lieve.Comparison.Application.Airports.Queries.GetAirports;
+namespace Lieve.Comparison.Application.Airports;
 
 public class GetAirportsHandler : IRequestHandler<GetAirports.Request, GetAirports.Response>
 {
@@ -40,9 +41,22 @@ public class GetAirportsHandler : IRequestHandler<GetAirports.Request, GetAirpor
             .SortByDescending(x => x.IsPopular)
             .Limit(10)
             .ToListAsync(cancellationToken);
-        
-        var airportsDtos = AirportDto.MapFrom(airports).ToList();
+
+        var airportsDtos = MapFrom(airports).ToList();
         
         return new GetAirports.Response(airportsDtos);
+    }
+
+    public static IEnumerable<AirportDto> MapFrom(IEnumerable<Airport> airports)
+    {
+        return airports.Select(airport =>
+            new AirportDto
+            {
+                IataCode = airport.IataCode,
+                Name = airport.Name,
+                CityName = airport.City.DisplayNames.FirstOrDefault(x => x.Language == "fa-IR")!.Value,
+                CountryName = airport.City.Country.DisplayNames.FirstOrDefault(x => x.Language == "fa-IR")!.Value
+            }
+        ).ToList();
     }
 }

@@ -1,5 +1,5 @@
-﻿using Lieve.Comparison.Application.Airports.Queries.GetAirports;
-using Lieve.Comparison.Core.Enums;
+﻿using Lieve.Comparison.Application.Airports;
+using Lieve.Comparison.Core.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

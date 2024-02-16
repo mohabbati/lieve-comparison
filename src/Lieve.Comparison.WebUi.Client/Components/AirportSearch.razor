@@ -1,14 +1,10 @@
-﻿@using Lieve.Comparison.Application.Airports.Queries.GetAirports
-@using Lieve.Comparison.Core.Enums
-@using Lieve.Comparison.WebUi.Client.Services.Interfaces
-@inject IAirportClient AirportClient
-@* @attribute [StreamRendering] *@
-@* @rendermode InteractiveAuto *@
+﻿@* @attribute [StreamRendering] *@
+@rendermode InteractiveAuto
 
 <h3>AirportSearch</h3>
 
 <p>This component demonstrates searching airports.</p>
-<input @bind="searchClause" @oninput="async e => await GetAirports(e.Value.ToString())" type="text" placeholder="Enter...">
+<input @oninput="async e => await GetAirports(e.Value?.ToString())" type="text" placeholder="Enter...">
 @* <button @onclick="async () => await GetAirports()">Search</button> *@
 
 
@@ -43,22 +39,3 @@ else
     </table>
 }
 
-@code
-{
-    private string searchClause;
-
-    private List<AirportDto>? Airports { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        Airports = await GetAirports(string.Empty);
-    }
-
-    private async Task<List<AirportDto>> GetAirports(string input)
-    {
-        var response = await AirportClient.GetAsync(LocalityType.International, input);
-        Airports = response;
-
-        return response;
-    }
-}

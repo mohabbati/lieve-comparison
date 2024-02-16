@@ -15,4 +15,8 @@
       <Folder Include="Interfaces\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Lieve.Comparison.Core.Shared\Lieve.Comparison.Core.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

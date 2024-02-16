@@ -1,6 +1,7 @@
-﻿using Lieve.Comparison.Core.Enums;
+﻿using Lieve.Comparison.Core.Shared.Enums;
+using Lieve.Comparison.Core.Shared.Models.Airports;
 
-namespace Lieve.Comparison.Application.Airports.Queries.GetAirports;
+namespace Lieve.Comparison.Application.Airports;
 
 public abstract class GetAirports
 {
