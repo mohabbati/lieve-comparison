@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Lieve.Comparison.Core.Shared\Lieve.Comparison.Core.Shared.csproj" />
+      <ProjectReference Include="..\Lieve.Comparison.Core.Shared\Lieve.Comparison.Domain.Shared.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
-﻿using Lieve.Comparison.Core.Shared.Enums;
-using Lieve.Comparison.Core.Shared.Models.Airports;
+﻿using Lieve.Comparison.Domain.Shared.Enums;
+using Lieve.Comparison.Domain.Shared.Models.Airports;
 
 namespace Lieve.Comparison.WebUi.Client.Services.Interfaces;
 

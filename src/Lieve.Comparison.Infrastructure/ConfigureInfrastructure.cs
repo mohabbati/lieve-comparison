@@ -1,4 +1,4 @@
-﻿using Lieve.Comparison.Core.Entities;
+﻿using Lieve.Comparison.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;

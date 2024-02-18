@@ -1,6 +1,6 @@
-﻿using Lieve.Comparison.Core.Entities;
-using Lieve.Comparison.Core.Shared.Enums;
-using Lieve.Comparison.Core.Shared.Models.Airports;
+﻿using Lieve.Comparison.Domain.Entities;
+using Lieve.Comparison.Domain.Shared.Enums;
+using Lieve.Comparison.Domain.Shared.Models.Airports;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -18,6 +18,7 @@ public class GetAirportsHandler : IRequestHandler<GetAirports.Request, GetAirpor
     public async Task<GetAirports.Response> Handle(GetAirports.Request request, CancellationToken cancellationToken)
     {
         const int iranCode = 101061;
+        const int ikaCode = 12000321;
 
         var filterBuilder = Builders<Airport>.Filter;
         var filter = string.IsNullOrWhiteSpace(request.Clause)
@@ -31,14 +32,22 @@ public class GetAirportsHandler : IRequestHandler<GetAirports.Request, GetAirpor
 
         filter &= request.LocalityType switch
         {
-            LocalityType.Domestic => filterBuilder.Eq(x => x.City.Country.Code, iranCode),
-            LocalityType.International => filterBuilder.Ne(x => x.City.Country.Code, iranCode),
+            LocalityType.Domestic => filterBuilder
+                .Or(Builders<Airport>.Filter.Eq(x => x.City.Country.Code, iranCode),
+                    Builders<Airport>.Filter.Ne(x => x.Code, ikaCode)),
+            LocalityType.International => filterBuilder
+                .Or(Builders<Airport>.Filter.Ne(x => x.City.Country.Code, iranCode),
+                    Builders<Airport>.Filter.Eq(x => x.Code, ikaCode)),
             _ => filterBuilder.Empty
         };
 
         var airports = await _mongoCollection
             .Find(filter)
             .SortByDescending(x => x.IsPopular)
+                .ThenBy(x => x.Code)
+                .ThenBy(x => x.City.Code)
+                .ThenBy(x => x.IataCode)
+                .ThenBy(x => x.City.Country.Code)
             .Limit(10)
             .ToListAsync(cancellationToken);
 

@@ -1,41 +1,42 @@
-﻿@* @attribute [StreamRendering] *@
+﻿@using Lieve.Comparison.Domain.Shared.Enums
 @rendermode InteractiveAuto
 
-<h3>AirportSearch</h3>
+<h6>Compare flights</h6>
 
-<p>This component demonstrates searching airports.</p>
-<input @oninput="async e => await GetAirports(e.Value?.ToString())" type="text" placeholder="Enter...">
-@* <button @onclick="async () => await GetAirports()">Search</button> *@
+<EditForm Model="@model" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
 
+    <BitDropdown @bind-Value="model.Origin"
+                    @oninput="async (o) => await SetDropDownList(originAirports, o.Value!.ToString())"
+                    Items="originAirports"
+                    Placeholder="Origin"
+                    IsRequired="true"
+                    Combo />
 
-@if (Airports == null)
-{
-    <p>
-        <em>Loading...</em>
-    </p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>IataCode</th>
-                <th>Name</th>
-                <th>City</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var airport in Airports)
-            {
-                <tr>
-                    <td>@airport.IataCode</td>
-                    <td>@airport.Name</td>
-                    <td>@airport.CityName</td>
-                    <td>@airport.CountryName</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    <BitDropdown @bind-Value="model.Destination"
+                    @oninput="async (o) => await SetDropDownList(destinationAirports, o.Value!.ToString())"
+                    Items="destinationAirports"
+                    Placeholder="Origin"
+                    IsRequired="true"
+                    Combo />
 
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="4">
+            <MudAutocomplete T="string" Label="Origin" @bind-Value="model.Destination" SearchFuncWithCancel="@Search" Variant="Variant.Outlined" ShowProgressIndicator="true" />
+        </MudItem>
+    </MudGrid>
+
+    @* <MudSelect T="string" Label="Coffee" AnchorOrigin="Origin.BottomCenter">
+        <MudSelectItem Value="@("Cappuccino")" />
+        <MudSelectItem Value="@("Cafe Latte")" />
+        <MudSelectItem Value="@("Espresso")" />
+    </MudSelect> *@
+
+    @* <BitDateRangePicker MinDate="DateTimeOffset.Now" ShowWeekNumbers="true" @bind-Value="model.DateRange" />
+
+    <MudNumericField @bind-Value="model.Adl" Label="Standard" Variant="Variant.Text" Min="1" Max="9" />
+    <MudNumericField @bind-Value="model.Chd" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
+    <MudNumericField @bind-Value="model.Inf" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
+    
+    <BitButton Type="ButtonType.Submit">Submit</BitButton> *@
+</EditForm>

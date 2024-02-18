@@ -1,4 +1,4 @@
-﻿namespace Lieve.Comparison.Core.Shared.Models.Airports;
+﻿namespace Lieve.Comparison.Domain.Shared.Models.Airports;
 
 public record AirportDto
 {

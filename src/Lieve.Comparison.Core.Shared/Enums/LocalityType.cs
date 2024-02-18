@@ -1,4 +1,4 @@
-﻿namespace Lieve.Comparison.Core.Shared.Enums;
+﻿namespace Lieve.Comparison.Domain.Shared.Enums;
 
 [Flags]
 public enum LocalityType

@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1C18AB64
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Application", "src\Lieve.Comparison.Application\Lieve.Comparison.Application.csproj", "{D98354D0-E4A2-4691-A934-21EF95B99927}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Core", "src\Lieve.Comparison.Core\Lieve.Comparison.Core.csproj", "{A99988DD-E6DF-4D40-AF48-F90AC401F7E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Domain", "src\Lieve.Comparison.Core\Lieve.Comparison.Domain.csproj", "{A99988DD-E6DF-4D40-AF48-F90AC401F7E9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Infrastructure", "src\Lieve.Comparison.Infrastructure\Lieve.Comparison.Infrastructure.csproj", "{E28CDF50-2042-4A7D-8889-303C3C39DE04}"
 EndProject
@@ -17,9 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.WebUi", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.WebUi.Client", "src\Lieve.Comparison.WebUi.Client\Lieve.Comparison.WebUi.Client.csproj", "{4E49F86F-1678-47A1-A077-68E41A955B4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.Test", "tests\Lieve.Comparison.Test\Lieve.Comparison.Test.csproj", "{8C418F58-96B7-4B39-B240-57076D0F73A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Test", "tests\Lieve.Comparison.Test\Lieve.Comparison.Test.csproj", "{8C418F58-96B7-4B39-B240-57076D0F73A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.Core.Shared", "src\Lieve.Comparison.Core.Shared\Lieve.Comparison.Core.Shared.csproj", "{9749A35B-E464-4055-9B04-60B9F2100AA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Domain.Shared", "src\Lieve.Comparison.Core.Shared\Lieve.Comparison.Domain.Shared.csproj", "{9749A35B-E464-4055-9B04-60B9F2100AA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.WebApi", "src\Lieve.Comparison.WebApi\Lieve.Comparison.WebApi.csproj", "{7A11B264-6736-4BC9-818C-08AC3F5DAB3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{9749A35B-E464-4055-9B04-60B9F2100AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9749A35B-E464-4055-9B04-60B9F2100AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9749A35B-E464-4055-9B04-60B9F2100AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A11B264-6736-4BC9-818C-08AC3F5DAB3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A11B264-6736-4BC9-818C-08AC3F5DAB3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A11B264-6736-4BC9-818C-08AC3F5DAB3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A11B264-6736-4BC9-818C-08AC3F5DAB3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{4E49F86F-1678-47A1-A077-68E41A955B4A} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
 		{8C418F58-96B7-4B39-B240-57076D0F73A0} = {1C18AB64-EAD6-4397-8B5A-37D40B0EE8CB}
 		{9749A35B-E464-4055-9B04-60B9F2100AA8} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
+		{7A11B264-6736-4BC9-818C-08AC3F5DAB3E} = {8D8FC565-8EB2-44E4-AC91-FE51E0976795}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78DC0924-45B6-418B-BABE-488B8CD6E0A5}

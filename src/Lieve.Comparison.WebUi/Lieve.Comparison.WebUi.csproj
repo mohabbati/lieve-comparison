@@ -4,13 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>6940c185-823c-49b4-9b49-ba8c6ea3d1a0</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-	<ProjectReference Include="..\Lieve.Comparison.Infrastructure\Lieve.Comparison.Infrastructure.csproj" />
 	<ProjectReference Include="..\Lieve.Comparison.WebUi.Client\Lieve.Comparison.WebUi.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
 </Project>
