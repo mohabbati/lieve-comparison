@@ -4,14 +4,34 @@ namespace Lieve.Comparison.WebUi.Client.Components;
 
 public partial class AirportSearch
 {
-    private MudForm form = default!;
-    private SearchModelFluentValidator searchValidator = new();
-    private SearchModel model = new();
-    private MudDateRangePicker _picker = default!;
-    private CultureInfo _cultureInfo = new CultureInfo("fa-IR");
+    private MudForm _form = default!;
+    private MudDateRangePicker _dateRangePicker = default!;
+
+    private readonly SearchModelFluentValidator searchValidator = new();
+    private readonly SearchModel model = new();
+    private readonly CultureInfo cultureInfo = new("fa-IR");
 
     [Inject]
     public required IAirportClient AirportClient { get; set; }
+
+    private async Task Submit()
+    {
+        await _form.Validate();
+
+        if (_form.IsValid)
+        {
+            //
+        }
+    }
+
+    private async Task<IEnumerable<string>> AirportLookup(string value, CancellationToken token)
+    {
+        var airports = await AirportClient.GetAsync(LocalityType.International, value ?? string.Empty);
+
+        var result = airports.Select(item => $"{item.IataCode}-{item.CountryName}-{item.CityName}-{item.Name}").ToList();
+
+        return result;
+    }
 
     public class SearchModel
     {
@@ -21,15 +41,6 @@ public partial class AirportSearch
         public int Adl { get; set; } = 1;
         public int Chd { get; set; }
         public int Inf { get; set; }
-    }
-
-    private async Task<IEnumerable<string>> Search(string value, CancellationToken token)
-    {
-        var airports = await AirportClient.GetAsync(LocalityType.International, value ?? string.Empty);
-
-        var result = airports.Select(item => $"{item.IataCode}-{item.CountryName}-{item.CityName}-{item.Name}").ToList();
-
-        return result;
     }
 
     public class SearchModelFluentValidator : AbstractValidator<SearchModel>
@@ -54,15 +65,5 @@ public partial class AirportSearch
                 return [];
             return result.Errors.Select(e => e.ErrorMessage);
         };
-    }
-
-    private async Task Submit()
-    {
-        await form.Validate();
-
-        if (form.IsValid)
-        {
-            //
-        }
     }
 }

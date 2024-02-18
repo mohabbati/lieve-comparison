@@ -2,31 +2,35 @@
 
 <h6>Compare flights</h6>
 
+<MudPopoverProvider />
+
 <MudCard>
-    <MudForm Model="@model" @ref="@form" Validation="@(searchValidator.ValidateValue)" ValidationDelay="0">
+    <MudForm Model="@model" @ref="@_form" Validation="@(searchValidator.ValidateValue)" ValidationDelay="0">
         <MudCardContent>
             <MudAutocomplete @bind-Value="model.Origin"
                              T="string"
                              For="@(() => model.Origin)"
+                             MinDate="DateTime.Now"
                              Immediate="true"
-                             SearchFuncWithCancel="@Search"
+                             SearchFuncWithCancel="@AirportLookup"
                              Label="Origin"
                              Variant="Variant.Text"
                              ShowProgressIndicator="true" />
             <MudAutocomplete @bind-Value="model.Destination"
                              T="string"
                              For="@(() => model.Destination)"
+                             MinDate="DateTime.Now"
                              Immediate="true"
                              Label="Destination"
-                             SearchFuncWithCancel="@Search"
+                             SearchFuncWithCancel="@AirportLookup"
                              Variant="Variant.Text"
                              ShowProgressIndicator="true" />
             
-            <MudDateRangePicker Culture="_cultureInfo" @ref="_picker" Label="With action buttons" @bind-DateRange="model.DateRange" AutoClose="false">
+            <MudDateRangePicker Culture="cultureInfo" @ref="_dateRangePicker" Label="With action buttons" @bind-DateRange="model.DateRange" AutoClose="false">
                 <PickerActions>
-                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => _picker.Clear())">Clear</MudButton>
-                    <MudButton OnClick="@(() => _picker.Close(false))">Cancel</MudButton>
-                    <MudButton Color="Color.Primary" OnClick="@(() => _picker.Close())">Ok</MudButton>
+                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => _dateRangePicker.Clear())">Clear</MudButton>
+                    <MudButton OnClick="@(() => _dateRangePicker.Close(false))">Cancel</MudButton>
+                    <MudButton Color="Color.Primary" OnClick="@(() => _dateRangePicker.Close())">Ok</MudButton>
                 </PickerActions>
             </MudDateRangePicker>
 

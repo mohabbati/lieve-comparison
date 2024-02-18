@@ -1,6 +1,5 @@
 using Lieve.Comparison.WebUi.Components;
 using Lieve.Comparison.WebUi.Client.Extensions;
-using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +9,7 @@ builder.Services
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
-builder.Services
-    .AddLieveHttpClients(new Uri(builder.Configuration.GetSection("HostedUrl").Value!));
-
-builder.Services.AddMudServices(x =>
-    x.PopoverOptions.ThrowOnDuplicateProvider = false);
+builder.Services.AddSharedServices(builder.Configuration);
 
 var app = builder.Build();
 
