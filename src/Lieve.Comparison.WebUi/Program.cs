@@ -13,7 +13,8 @@ builder.Services
 builder.Services
     .AddLieveHttpClients(new Uri(builder.Configuration.GetSection("HostedUrl").Value!));
 
-builder.Services.AddMudServices();
+builder.Services.AddMudServices(x =>
+    x.PopoverOptions.ThrowOnDuplicateProvider = false);
 
 var app = builder.Build();
 

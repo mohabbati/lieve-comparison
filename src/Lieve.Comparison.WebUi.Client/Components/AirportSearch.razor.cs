@@ -1,53 +1,26 @@
-﻿using Bit.BlazorUI;
-using Lieve.Comparison.Domain.Shared.Enums;
-using Lieve.Comparison.WebUi.Client.Services.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using System.Globalization;
 
 namespace Lieve.Comparison.WebUi.Client.Components;
 
 public partial class AirportSearch
 {
+    private MudForm form = default!;
+    private SearchModelFluentValidator searchValidator = new();
     private SearchModel model = new();
-
-    private readonly List<BitDropdownItem<string>> originAirports = [];
-    private readonly List<BitDropdownItem<string>> destinationAirports = [];
+    private MudDateRangePicker _picker = default!;
+    private CultureInfo _cultureInfo = new CultureInfo("fa-IR");
 
     [Inject]
     public required IAirportClient AirportClient { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        await SetDropDownList(originAirports, string.Empty);
-        await SetDropDownList(destinationAirports, string.Empty);
-    }
-
-    private class SearchModel
+    public class SearchModel
     {
         public string Origin { get; set; } = default!;
         public string Destination { get; set; } = default!;
-        public BitDateRangePickerValue DateRange { get; set; } = default!;
-        public string Type { get; set; } = default!;
+        public DateRange? DateRange { get; set; }
         public int Adl { get; set; } = 1;
         public int Chd { get; set; }
         public int Inf { get; set; }
-    }
-
-    private async Task SetDropDownList(List<BitDropdownItem<string>> dropDownList, string? input)
-    {
-        var airports = await AirportClient.GetAsync(LocalityType.International, input ?? string.Empty);
-
-        dropDownList.Clear();
-
-        if (string.IsNullOrWhiteSpace(input))
-            dropDownList.Add(new() { ItemType = BitDropdownItemType.Header, Text = "Popular" });
-
-        foreach (var item in airports)
-        {
-            dropDownList.Add(
-                new() { Text = $"{item.IataCode}-{item.CountryName}-{item.CityName}-{item.Name}", Value = item.IataCode }
-                );
-        }
-        //new() { ItemType = BitDropdownItemType.Divider }
     }
 
     private async Task<IEnumerable<string>> Search(string value, CancellationToken token)
@@ -59,8 +32,37 @@ public partial class AirportSearch
         return result;
     }
 
+    public class SearchModelFluentValidator : AbstractValidator<SearchModel>
+    {
+        public SearchModelFluentValidator()
+        {
+            RuleFor(x => x.Origin)
+                .NotEmpty();
+
+            RuleFor(x => x.Destination)
+                .NotEmpty();
+
+            RuleFor(x => x.DateRange)
+                .NotNull()
+                .NotEmpty();
+        }
+
+        public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
+        {
+            var result = await ValidateAsync(ValidationContext<SearchModel>.CreateWithOptions((SearchModel)model, x => x.IncludeProperties(propertyName)));
+            if (result.IsValid)
+                return [];
+            return result.Errors.Select(e => e.ErrorMessage);
+        };
+    }
+
     private async Task Submit()
     {
-        //
+        await form.Validate();
+
+        if (form.IsValid)
+        {
+            //
+        }
     }
 }
