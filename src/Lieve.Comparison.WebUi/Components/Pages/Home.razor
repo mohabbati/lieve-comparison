@@ -1,5 +1,10 @@
 ﻿@page "/"
+@using Lieve.Comparison.WebUi.Client.Components.FlightCriteria
+@using Lieve.Comparison.WebUi.Client.Components.VendorSelection
 
 <PageTitle>Home</PageTitle>
 
-<AirportSearch />
+<MudCard>
+    <FlightCriteriaComponent OnSearchSubmitted="HandleOnSearchSubmitted" />
+    <VendorSelectionComponent />
+</MudCard>

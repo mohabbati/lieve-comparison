@@ -13,15 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Infrastructure", "src\Lieve.Comparison.Infrastructure\Lieve.Comparison.Infrastructure.csproj", "{E28CDF50-2042-4A7D-8889-303C3C39DE04}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.WebUi", "src\Lieve.Comparison.WebUi\Lieve.Comparison.WebUi.csproj", "{2F9815EB-57A2-45DE-9CE9-679F7EC41F8F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.WebUi.Client", "src\Lieve.Comparison.WebUi.Client\Lieve.Comparison.WebUi.Client.csproj", "{4E49F86F-1678-47A1-A077-68E41A955B4A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Test", "tests\Lieve.Comparison.Test\Lieve.Comparison.Test.csproj", "{8C418F58-96B7-4B39-B240-57076D0F73A0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.Domain.Shared", "src\Lieve.Comparison.Core.Shared\Lieve.Comparison.Domain.Shared.csproj", "{9749A35B-E464-4055-9B04-60B9F2100AA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lieve.Comparison.WebApi", "src\Lieve.Comparison.WebApi\Lieve.Comparison.WebApi.csproj", "{7A11B264-6736-4BC9-818C-08AC3F5DAB3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.WebApi", "src\Lieve.Comparison.WebApi\Lieve.Comparison.WebApi.csproj", "{7A11B264-6736-4BC9-818C-08AC3F5DAB3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.WebUi", "src\Lieve.Comparison.WebUi\Lieve.Comparison.WebUi.csproj", "{2F9815EB-57A2-45DE-9CE9-679F7EC41F8F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lieve.Comparison.WebUi.Client", "src\Lieve.Comparison.WebUi.Client\Lieve.Comparison.WebUi.Client.csproj", "{4E49F86F-1678-47A1-A077-68E41A955B4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

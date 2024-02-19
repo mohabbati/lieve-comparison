@@ -1,0 +1,45 @@
+﻿@rendermode InteractiveAuto
+
+<MudPopoverProvider />
+
+<MudForm Model="@model" @ref="@_form" Validation="@(searchValidator.ValidateValue)" ValidationDelay="0">
+    <MudCardContent>
+        <MudAutocomplete @bind-Value="model.Origin"
+                            T="string"
+                            For="@(() => model.Origin)"
+                            Immediate="true"
+                            SearchFuncWithCancel="@AirportLookup"
+                            Label="Origin"
+                            Variant="Variant.Text"
+                            ShowProgressIndicator="true" />
+        
+        <MudAutocomplete @bind-Value="model.Destination"
+                            T="string"
+                            For="@(() => model.Destination)"
+                            Immediate="true"
+                            Label="Destination"
+                            SearchFuncWithCancel="@AirportLookup"
+                            Variant="Variant.Text"
+                            ShowProgressIndicator="true" />
+            
+        <MudDateRangePicker @bind-DateRange="model.DateRange"
+                            @ref="_dateRangePicker"
+                            Culture="cultureInfo"
+                            MinDate="DateTime.Now.AddDays(-1)"
+                            Label="Date"
+                            AutoClose="false">
+            <PickerActions>
+                <MudButton Class="mr-auto align-self-start" OnClick="@(() => _dateRangePicker.Clear())">Clear</MudButton>
+                <MudButton OnClick="@(() => _dateRangePicker.Close(false))">Cancel</MudButton>
+                <MudButton Color="Color.Primary" OnClick="@(() => _dateRangePicker.Close())">Ok</MudButton>
+            </PickerActions>
+        </MudDateRangePicker>
+
+        <MudNumericField @bind-Value="model.Adl" Label="Standard" Variant="Variant.Text" Min="1" Max="9" />
+        <MudNumericField @bind-Value="model.Chd" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
+        <MudNumericField @bind-Value="model.Inf" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
+    </MudCardContent>
+</MudForm>
+<MudCardActions>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await SubmitAsync())">Search & Compare</MudButton>
+</MudCardActions>
