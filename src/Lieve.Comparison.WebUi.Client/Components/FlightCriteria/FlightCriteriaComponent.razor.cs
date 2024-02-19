@@ -28,11 +28,11 @@ public partial class FlightCriteriaComponent
         }
     }
 
-    private async Task<IEnumerable<string>> AirportLookup(string input, CancellationToken cancellationToken)
+    private async Task<IEnumerable<KeyValuePair<string, string>>> AirportLookup(string input, CancellationToken cancellationToken)
     {
         var airports = await AirportClient.GetAsync(LocalityType.International, input ?? string.Empty);
 
-        var result = airports.Select(x => $"{x.IataCode}-{x.CountryName}-{x.CityName}-{x.Name}").ToList();
+        var result = airports.Select(x => new KeyValuePair<string, string>(x.IataCode, $"{x.IataCode}-{x.CountryName}-{x.CityName}-{x.Name}")).ToList();
 
         return result;
     }

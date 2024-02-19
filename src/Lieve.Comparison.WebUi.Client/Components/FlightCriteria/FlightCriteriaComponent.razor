@@ -5,22 +5,22 @@
 <MudForm Model="@model" @ref="@_form" Validation="@(searchValidator.ValidateValue)" ValidationDelay="0">
     <MudCardContent>
         <MudAutocomplete @bind-Value="model.Origin"
-                            T="string"
-                            For="@(() => model.Origin)"
-                            Immediate="true"
-                            SearchFuncWithCancel="@AirportLookup"
-                            Label="Origin"
-                            Variant="Variant.Text"
-                            ShowProgressIndicator="true" />
+                         T="KeyValuePair<string, string>"
+                         For="@(() => model.Origin)"
+                         Immediate="true"
+                         SearchFuncWithCancel="@AirportLookup"
+                         Label="Origin"
+                         Variant="Variant.Text"
+                         ShowProgressIndicator="true" />
         
         <MudAutocomplete @bind-Value="model.Destination"
-                            T="string"
-                            For="@(() => model.Destination)"
-                            Immediate="true"
-                            Label="Destination"
-                            SearchFuncWithCancel="@AirportLookup"
-                            Variant="Variant.Text"
-                            ShowProgressIndicator="true" />
+                         T="KeyValuePair<string, string>"
+                         For="@(() => model.Destination)"
+                         Immediate="true"
+                         Label="Destination"
+                         SearchFuncWithCancel="@AirportLookup"
+                         Variant="Variant.Text"
+                         ShowProgressIndicator="true" />
             
         <MudDateRangePicker @bind-DateRange="model.DateRange"
                             @ref="_dateRangePicker"
