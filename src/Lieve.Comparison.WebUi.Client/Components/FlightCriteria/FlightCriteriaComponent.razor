@@ -2,42 +2,63 @@
 
 <MudPopoverProvider />
 
-<MudForm Model="@model" @ref="@_form" Validation="@(searchValidator.ValidateValue)" ValidationDelay="0">
+<MudForm Model="@model" @ref="@_form">
     <MudCardContent>
         <MudAutocomplete @bind-Value="model.Origin"
+                         Required
+                         Validation="@(new Func<KeyValuePair<string, string>, IEnumerable<string>>(Validate))"
                          T="KeyValuePair<string, string>"
-                         For="@(() => model.Origin)"
-                         Immediate="true"
+                         ToStringFunc="@(x => x.Value)"
                          SearchFuncWithCancel="@AirportLookup"
                          Label="Origin"
+                         Strict="false"
+                         Immediate="true"
+                         CoerceText="false"
+                         CoerceValue="false"
                          Variant="Variant.Text"
-                         ShowProgressIndicator="true" />
+                         ShowProgressIndicator="true" >
+            <ProgressIndicatorTemplate>
+                <MudProgressLinear Size="Size.Small" Indeterminate="true" Color="Color.Default" />
+            </ProgressIndicatorTemplate>
+        </MudAutocomplete>
         
         <MudAutocomplete @bind-Value="model.Destination"
+                         Required
+                         Validation="@(new Func<KeyValuePair<string, string>, IEnumerable<string>>(Validate))"
                          T="KeyValuePair<string, string>"
-                         For="@(() => model.Destination)"
-                         Immediate="true"
-                         Label="Destination"
+                         ToStringFunc="@(x => x.Value)"
                          SearchFuncWithCancel="@AirportLookup"
+                         Label="Destination"
+                         Strict="false"
+                         Immediate="true"
+                         CoerceText="false"
+                         CoerceValue="false"
                          Variant="Variant.Text"
-                         ShowProgressIndicator="true" />
+                         ShowProgressIndicator="true">
+            <ProgressIndicatorTemplate>
+                <MudProgressLinear Size="Size.Small" Indeterminate="true" Color="Color.Default" />
+            </ProgressIndicatorTemplate>
+        </MudAutocomplete>
             
         <MudDateRangePicker @bind-DateRange="model.DateRange"
                             @ref="_dateRangePicker"
-                            Culture="cultureInfo"
+                            Culture="CultureInfo"
+                            Required
+                            PickerMonth="lastPicker"
                             MinDate="DateTime.Now.AddDays(-1)"
                             Label="Date"
                             AutoClose="false">
             <PickerActions>
                 <MudButton Class="mr-auto align-self-start" OnClick="@(() => _dateRangePicker.Clear())">Clear</MudButton>
+                <MudButton Class="mr-auto align-self-start" OnClick="@(ChangeCulture)">Change culture</MudButton>
                 <MudButton OnClick="@(() => _dateRangePicker.Close(false))">Cancel</MudButton>
                 <MudButton Color="Color.Primary" OnClick="@(() => _dateRangePicker.Close())">Ok</MudButton>
             </PickerActions>
         </MudDateRangePicker>
 
-        <MudNumericField @bind-Value="model.Adl" Label="Standard" Variant="Variant.Text" Min="1" Max="9" />
-        <MudNumericField @bind-Value="model.Chd" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
-        <MudNumericField @bind-Value="model.Inf" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
+        <MudNumericField Required @bind-Value="model.Adl" Label="Standard" Variant="Variant.Text" Min="1" Max="9" />
+        <MudNumericField Required @bind-Value="model.Chd" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
+        <MudNumericField Required @bind-Value="model.Inf" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
     </MudCardContent>
 </MudForm>
 <MudCardActions>

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using MudBlazor.Extensions;
+using System.Globalization;
 
 namespace Lieve.Comparison.WebUi.Client.Components.FlightCriteria;
 
@@ -7,12 +8,11 @@ public partial class FlightCriteriaComponent
     private MudForm _form = default!;
     private MudDateRangePicker _dateRangePicker = default!;
 
-    private readonly SearchModelFluentValidator searchValidator = new();
     private readonly FlightCriteriaEntered model = new();
-    private readonly CultureInfo cultureInfo = new("fa-IR");
 
     [Parameter]
     public EventCallback<FlightCriteriaEventArgs> OnSearchSubmitted{ get; set; }
+    public CultureInfo CultureInfo { get; set; } = new("fa-IR");
 
     [Inject]
     public required IAirportClient AirportClient { get; set; }
@@ -37,27 +37,27 @@ public partial class FlightCriteriaComponent
         return result;
     }
 
-    public class SearchModelFluentValidator : AbstractValidator<FlightCriteriaEntered>
+    private static IEnumerable<string> Validate(KeyValuePair<string, string> value)
     {
-        public SearchModelFluentValidator()
+        if (string.IsNullOrWhiteSpace(value.Key) || string.IsNullOrWhiteSpace(value.Value))
         {
-            RuleFor(x => x.Origin)
-                .NotEmpty();
-
-            RuleFor(x => x.Destination)
-                .NotEmpty();
-
-            RuleFor(x => x.DateRange)
-                .NotNull()
-                .NotEmpty();
+            yield return "The State field is required";
         }
+    }
 
-        public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
+    private DateTime? lastPicker;
+    private void ChangeCulture()
+    {
+        lastPicker ??= _dateRangePicker.PickerMonth ?? DateTime.Now;
+
+        if (CultureInfo.Name == "fa-IR")
         {
-            var result = await ValidateAsync(ValidationContext<FlightCriteriaEntered>.CreateWithOptions((FlightCriteriaEntered)model, x => x.IncludeProperties(propertyName)));
-            if (result.IsValid)
-                return [];
-            return result.Errors.Select(e => e.ErrorMessage);
-        };
+            CultureInfo = new CultureInfo("en-US");
+        }
+        else
+        {
+            CultureInfo = new CultureInfo("fa-IR");
+        }
+        lastPicker = null;
     }
 }
