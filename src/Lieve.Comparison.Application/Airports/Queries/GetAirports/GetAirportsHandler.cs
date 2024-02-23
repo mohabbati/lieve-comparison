@@ -1,10 +1,7 @@
-﻿using Lieve.Comparison.Domain.Entities;
-using Lieve.Comparison.Domain.Shared.Enums;
-using Lieve.Comparison.Domain.Shared.Models.Airports;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Lieve.Comparison.Application.Airports;
+namespace Lieve.Comparison.Application.Airports.Queries;
 
 public class GetAirportsHandler : IRequestHandler<GetAirports.Request, GetAirports.Response>
 {

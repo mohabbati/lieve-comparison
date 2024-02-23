@@ -1,22 +1,25 @@
 ﻿using Lieve.Comparison.WebUi.Client.Components.FlightCriteria;
-using Microsoft.AspNetCore.Components;
 
-namespace Lieve.Comparison.WebUi.Components.Pages;
+namespace Lieve.Comparison.WebUi.Client.Components.CompareCriteria;
 
-public partial class Home
+public partial class CompareCriteriaComponent
 {
     [Inject]
     public required NavigationManager NavigationManager { get; set; }
 
-    //[Inject]
-    //public required IVendorService VendorService { get; set; }
+    private IList<VendorDto> _vendorList;
 
     public async Task HandleOnSearchSubmitted(FlightCriteriaEventArgs args)
     {
         ArgumentNullException.ThrowIfNull(args);
 
-        //var url = VendorService.GenerateNavigationUrl();
+        NavigationManager.NavigateTo("");
 
+        await Task.CompletedTask;
+    }
+
+    private async Task SubmitAsync()
+    {
         NavigationManager.NavigateTo("");
 
         await Task.CompletedTask;

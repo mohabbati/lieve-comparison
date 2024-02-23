@@ -1,0 +1,10 @@
+﻿@using Lieve.Comparison.WebUi.Client.Components.FlightCriteria
+@using Lieve.Comparison.WebUi.Client.Components.VendorSelection
+
+<MudCard>
+    <FlightCriteriaComponent OnSearchSubmitted="HandleOnSearchSubmitted" />
+    <VendorSelectionComponent Vendors="_vendorList" />
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await SubmitAsync())">Search & Compare</MudButton>
+    </MudCardActions>
+</MudCard>

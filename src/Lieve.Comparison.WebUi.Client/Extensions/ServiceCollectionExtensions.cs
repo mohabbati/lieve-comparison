@@ -20,6 +20,11 @@ public static class ServiceCollectionExtensions
             httpClient.BaseAddress = baseAddress;
         });
 
+        services.AddHttpClient<IVendorClient, VendorClient>(httpClient =>
+        {
+            httpClient.BaseAddress = baseAddress;
+        });
+
         return services;
     }
 }

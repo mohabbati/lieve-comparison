@@ -10,6 +10,7 @@ public static class ConfigureInfrastructure
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMongoCollection<Airport>(configuration, "airports");
+        services.AddMongoCollection<Vendor>(configuration, "vendors");
         
         return services;
     }

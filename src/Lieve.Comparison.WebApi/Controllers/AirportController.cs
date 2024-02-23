@@ -1,13 +1,8 @@
-﻿using Lieve.Comparison.Application.Airports;
-using Lieve.Comparison.Domain.Shared.Enums;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Lieve.Comparison.Application.Airports.Queries;
 
 namespace Lieve.Comparison.WebUi.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class AirportController : ControllerBase
+public class AirportController : CustomControllerBase
 {
     private readonly IMediator _mediator;
 
@@ -22,7 +17,7 @@ public class AirportController : ControllerBase
         [FromQuery] string? clause)
     {
         var response = await _mediator.Send(new GetAirports.Request(localityType, clause ?? string.Empty));
-        
+
         return Ok(response.AirportDtos);
     }
 }

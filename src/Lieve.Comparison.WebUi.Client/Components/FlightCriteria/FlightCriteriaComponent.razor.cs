@@ -1,5 +1,4 @@
-﻿using MudBlazor.Extensions;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Lieve.Comparison.WebUi.Client.Components.FlightCriteria;
 
@@ -30,7 +29,7 @@ public partial class FlightCriteriaComponent
 
     private async Task<IEnumerable<KeyValuePair<string, string>>> AirportLookup(string input, CancellationToken cancellationToken)
     {
-        var airports = await AirportClient.GetAsync(LocalityType.International, input ?? string.Empty);
+        var airports = await AirportClient.GetAsync(LocalityType.International, input ?? string.Empty, cancellationToken);
 
         var result = airports.Select(x => new KeyValuePair<string, string>(x.IataCode, $"{x.IataCode}-{x.CountryName}-{x.CityName}-{x.Name}")).ToList();
 

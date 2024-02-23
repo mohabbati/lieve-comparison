@@ -12,10 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Interfaces\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Lieve.Comparison.Core.Shared\Lieve.Comparison.Domain.Shared.csproj" />
     </ItemGroup>
 
