@@ -20,35 +20,4 @@ public sealed class VendorController : CustomControllerBase
 
         return Ok(response.VendorDtos);
     }
-
-    [HttpGet("[action]")]
-    public async Task<ActionResult<List<VendorUrlDto>>> GetUrls(
-        [FromQuery] string[] vendors,
-        [FromQuery] ServiceType serviceType,
-        [FromQuery] string from,
-        [FromQuery] string to,
-        [FromQuery] DateTimeOffset departureDate,
-        [FromQuery] DateTimeOffset? returnDate,
-        [FromQuery] short adl,
-        [FromQuery] short chd,
-        [FromQuery] short inf,
-        [FromQuery] CabinClass? cabinClass)
-    {
-        var response = await _mediator.Send(
-            new GetVendorUrls.Request
-            (
-                vendors,
-                serviceType,
-                from,
-                to,
-                departureDate,
-                returnDate,
-                adl,
-                chd,
-                inf,
-                cabinClass
-            ));
-
-        return Ok(response.VendorUrlDtos);
-    }
 }
