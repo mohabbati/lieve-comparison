@@ -2,7 +2,7 @@
 
 namespace Lieve.Comparison.WebUi.Client.Components.CompareCriteria;
 
-public partial class CompareCriteriaComponent
+public sealed partial class CompareCriteriaComponent
 {
     [Inject]
     public required NavigationManager NavigationManager { get; set; }

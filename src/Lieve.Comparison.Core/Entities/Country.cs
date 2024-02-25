@@ -1,6 +1,6 @@
 ﻿namespace Lieve.Comparison.Domain.Entities;
 
-public class Country
+public sealed class Country
 {
     public required int Code { get; set; }
     public required string Name { get; set; }

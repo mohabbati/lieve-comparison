@@ -4,5 +4,5 @@ public abstract class GetAirports
 {
     public record Request(LocalityType LocalityType, string Clause) : IRequest<Response>;
 
-    public record Response(List<AirportDto> AirportDtos);
+    public record Response(IList<AirportDto> AirportDtos);
 }

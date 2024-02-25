@@ -1,6 +1,6 @@
 ﻿namespace Lieve.Comparison.WebUi.Client.Components.VendorSelection;
 
-public partial class VendorSelectionComponent
+public sealed partial class VendorSelectionComponent
 {
     [Parameter]
     public IList<VendorDto> Vendors { get; set; } = [];

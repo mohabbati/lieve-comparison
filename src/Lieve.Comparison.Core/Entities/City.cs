@@ -1,6 +1,6 @@
 ﻿namespace Lieve.Comparison.Domain.Entities;
 
-public class City
+public sealed class City
 {
     public int Code { get; set; }
     public required string Name { get; set; }

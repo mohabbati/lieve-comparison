@@ -2,7 +2,7 @@
 
 namespace Lieve.Comparison.Domain.Entities;
 
-public class ProvidedService
+public sealed class ProvidedService
 {
     public required ServiceType ServiceType { get; set; }
     public required string UriTemplate { get; set; }

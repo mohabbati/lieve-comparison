@@ -2,7 +2,7 @@
 
 namespace Lieve.Comparison.WebUi.Controllers;
 
-public class AirportController : CustomControllerBase
+public sealed class AirportController : CustomControllerBase
 {
     private readonly IMediator _mediator;
 

@@ -2,7 +2,7 @@
 
 namespace Lieve.Comparison.Domain.Entities;
 
-public class Airport
+public sealed class Airport
 {
     public ObjectId _id { get; set; }
     public required City City { get; set; }

@@ -1,23 +1,26 @@
-﻿using MongoDB.Driver;
+﻿using Lieve.Comparison.Application.Interfaces;
+using MongoDB.Driver;
 
 namespace Lieve.Comparison.Application.Vendors.Queries;
 
-public class GetVendorsHandler : IRequestHandler<GetVendors.Request, GetVendors.Response>
+public sealed class GetVendorsHandler : IRequestHandler<GetVendors.Request, GetVendors.Response>
 {
-    private readonly IMongoCollection<Vendor> _mongoCollection;
+    private readonly IMongoDbContext _dbContext;
 
-    public GetVendorsHandler(IMongoCollection<Vendor> mongoCollection)
+    public GetVendorsHandler(IMongoDbContext dbContext)
     {
-        _mongoCollection = mongoCollection;
+        _dbContext = dbContext;
     }
 
     public async Task<GetVendors.Response> Handle(GetVendors.Request request, CancellationToken cancellationToken)
     {
-        var filter = Builders<Vendor>.Filter
-            .ElemMatch(v => v.ProvidedServices, ps => ps.ServiceType == request.ServiceType);
+        var filter = Builders<Vendor>.Filter.And(
+            Builders<Vendor>.Filter.Eq(x => x.IsActive, true),
+            Builders<Vendor>.Filter.ElemMatch(v => v.ProvidedServices, ps => ps.ServiceType == request.ServiceType));
 
-        var vendors = await _mongoCollection
+        var vendors = await _dbContext.Vendors
             .Find(filter)
+            .SortBy(x => x.Priority)
             .ToListAsync(cancellationToken);
 
         var vendorsDtos = MapFrom(vendors).ToList();

@@ -1,15 +1,16 @@
-﻿using MongoDB.Bson;
+﻿using Lieve.Comparison.Application.Interfaces;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Lieve.Comparison.Application.Airports.Queries;
 
-public class GetAirportsHandler : IRequestHandler<GetAirports.Request, GetAirports.Response>
+public sealed class GetAirportsHandler : IRequestHandler<GetAirports.Request, GetAirports.Response>
 {
-    private readonly IMongoCollection<Airport> _mongoCollection;
+    private readonly IMongoDbContext _dbContext;
 
-    public GetAirportsHandler(IMongoCollection<Airport> mongoCollection)
+    public GetAirportsHandler(IMongoDbContext dbContext)
     {
-        _mongoCollection = mongoCollection;
+        _dbContext = dbContext;
     }
 
     public async Task<GetAirports.Response> Handle(GetAirports.Request request, CancellationToken cancellationToken)
@@ -38,7 +39,7 @@ public class GetAirportsHandler : IRequestHandler<GetAirports.Request, GetAirpor
             _ => filterBuilder.Empty
         };
 
-        var airports = await _mongoCollection
+        var airports = await _dbContext.Airports
             .Find(filter)
             .SortByDescending(x => x.IsPopular)
                 .ThenBy(x => x.Code)

@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Lieve.Comparison.WebApi.Controllers.Common;
+﻿namespace Lieve.Comparison.WebApi.Controllers.Common;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CustomControllerBase : ControllerBase
+public abstract class CustomControllerBase : ControllerBase
 {
 }

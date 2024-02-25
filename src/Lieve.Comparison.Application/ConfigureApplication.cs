@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Lieve.Comparison.Application.Common.Behaviours;
-using Lieve.Comparison.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Lieve.Comparison.Application;
