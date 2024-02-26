@@ -4,6 +4,11 @@ namespace Lieve.Comparison.WebUi.Client.Components.CompareCriteria;
 
 public sealed partial class CompareCriteriaComponent
 {
+    private MudTabs tabs = default!;
+    private MudTabPanel domesticFlightPanel = default!;
+    private MudTabPanel internationalFlightPanel = default!;
+    private MudTabPanel panel03 = default!;
+
     [Inject]
     public required NavigationManager NavigationManager { get; set; }
 
