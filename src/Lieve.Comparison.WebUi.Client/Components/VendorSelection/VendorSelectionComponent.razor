@@ -1,9 +1,12 @@
 ﻿@rendermode InteractiveAuto
 @attribute [StreamRendering]
 
-@if (Vendors is null)
+@if (Vendors.Any() is false)
 {
-    <p>Loading...</p>
+    @for (int i = 0; i < 2; i++)
+    {
+        <MudSkeleton Height="60px" Width="30%" />
+    }
 }
 else
 {
