@@ -1,6 +1,6 @@
 ﻿namespace Lieve.Comparison.WebUi.Client.Components.FlightCriteria;
 
-public sealed class FlightCriteriaEntered
+public sealed class Flight
 {
     public TripType TripType { get; set; } = TripType.OneWay;
     public KeyValuePair<string, string> Origin { get; set; } = default!;

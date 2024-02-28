@@ -4,10 +4,10 @@ namespace Lieve.Comparison.WebUi.Client.Components.CompareCriteria;
 
 public sealed partial class CompareCriteriaComponent
 {
-    private readonly FlightCriteriaEntered _model = new();
-    private MudForm _form = default!;
     private MudTabs _tabs = default!;
-    private IList<VendorDto> _vendorList = [];
+    private MudForm _flightForm = default!;
+    private Flight _flight = new();
+    private IList<VendorDto> _vendors = [];
 
     [Inject]
     public required IVendorClient VendorClient { get; set; }
@@ -26,22 +26,22 @@ public sealed partial class CompareCriteriaComponent
         await base.OnAfterRenderAsync(firstRender);
     }
 
-    private async Task SetVendorsAsync()
-    {
-        _vendorList = await VendorClient.GetAsync(ResolveServiceType(), CancellationToken.None);
-    }
-
     private async Task SubmitAsync()
     {
-        await _form.Validate();
+        await _flightForm.Validate();
 
-        if (_form.IsValid is false) return;
+        if (_flightForm.IsValid is false) return;
         
-        var a = _vendorList.Any(x => x.IsSelected);
+        var a = _vendors.Any(x => x.IsSelected);
 
         NavigationManager.NavigateTo("");
 
         await Task.CompletedTask;
+    }
+
+    private async Task SetVendorsAsync()
+    {
+        _vendors = await VendorClient.GetAsync(ResolveServiceType(), CancellationToken.None);
     }
 
     private ServiceType ResolveServiceType()

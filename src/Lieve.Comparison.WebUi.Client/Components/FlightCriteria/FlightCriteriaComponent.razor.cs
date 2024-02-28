@@ -2,7 +2,9 @@
 
 public partial class FlightCriteriaComponent
 {
-    private readonly FlightCriteriaEntered _model = new();
+    [Parameter]
+    public Flight Flight { get; set; } = new();
+
     private readonly DeBouncer deBouncer = new(TimeSpan.FromMilliseconds(300));
 
     [Inject]
@@ -21,5 +23,10 @@ public partial class FlightCriteriaComponent
         });
         
         return result;
+    }
+
+    private void HandleAirportChanged()
+    {
+
     }
 }

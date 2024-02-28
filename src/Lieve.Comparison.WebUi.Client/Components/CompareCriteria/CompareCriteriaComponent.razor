@@ -13,10 +13,10 @@
         @if (_tabs.ActivePanelIndex == 0 || _tabs.ActivePanelIndex == 1)
         {
             <MudCard>
-                <MudForm Model="@_model" @ref="@_form">
-                    <FlightCriteriaComponent />
+                <MudForm Model="@_flight" @ref="@_flightForm">
+                    <FlightCriteriaComponent Flight="_flight" />
                 </MudForm>
-                <VendorSelectionComponent Vendors="_vendorList" />
+                <VendorSelectionComponent Vendors="_vendors" />
             </MudCard>
             <MudCardActions>
                 <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await SubmitAsync())">Search & Compare</MudButton>

@@ -2,5 +2,5 @@
 
 public sealed class FlightCriteriaEventArgs : EventArgs
 {
-    public FlightCriteriaEntered? FlightSearchModel { get; set; }
+    public Flight? FlightSearchModel { get; set; }
 }
