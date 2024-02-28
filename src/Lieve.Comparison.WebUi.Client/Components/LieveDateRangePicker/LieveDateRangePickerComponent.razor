@@ -1,0 +1,15 @@
+﻿<MudDateRangePicker @bind-DateRange="DateRange"
+                    @ref="_dateRangePicker"
+                    Culture="_cultureInfo"
+                    Required
+                    PickerMonth="lastPicker"
+                    MinDate="DateTime.Now.AddDays(-1)"
+                    Label="Date"
+                    AutoClose="false">
+    <PickerActions>
+        <MudButton Class="mr-auto align-self-start" OnClick="@(() => _dateRangePicker.Clear())">Clear</MudButton>
+        <MudButton Class="mr-auto align-self-start" OnClick="@(ChangeCulture)">Change culture</MudButton>
+        <MudButton OnClick="@(() => _dateRangePicker.Close(false))">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="@(() => _dateRangePicker.Close())">Ok</MudButton>
+    </PickerActions>
+</MudDateRangePicker>

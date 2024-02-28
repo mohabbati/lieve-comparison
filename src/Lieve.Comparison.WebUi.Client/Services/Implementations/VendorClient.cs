@@ -11,7 +11,7 @@ public class VendorClient : IVendorClient
         _httpClient = httpClient;
     }
 
-    public async Task<IList<VendorDto>> GetAsync(ServiceType serviceType, CancellationToken cancellationToken = default)
+    public async Task<IList<VendorDto>> GetAsync(ServiceType serviceType, CancellationToken cancellationToken)
     {
         var response = await _httpClient.GetFromJsonAsync<IList<VendorDto>>($"api/vendor?serviceType={serviceType.ToString()}", cancellationToken);
 

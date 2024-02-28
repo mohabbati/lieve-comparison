@@ -2,5 +2,5 @@
 
 public interface IVendorClient
 {
-    Task<IList<VendorDto>> GetAsync(ServiceType serviceType, CancellationToken cancellationToken = default);
+    Task<IList<VendorDto>> GetAsync(ServiceType serviceType, CancellationToken cancellationToken);
 }

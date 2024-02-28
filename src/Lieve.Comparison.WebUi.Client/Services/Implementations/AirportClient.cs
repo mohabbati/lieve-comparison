@@ -11,7 +11,7 @@ public class AirportClient : IAirportClient
         _httpClient = httpClient;
     }
 
-    public async Task<IList<AirportDto>> GetAsync(LocalityType localityType, string clause, CancellationToken cancellationToken = default)
+    public async Task<IList<AirportDto>> GetAsync(LocalityType localityType, string clause, CancellationToken cancellationToken)
     {
         var response = await _httpClient.GetFromJsonAsync<IList<AirportDto>>($"api/airport?localityType={localityType}&clause={clause}", cancellationToken);
 

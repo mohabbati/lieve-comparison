@@ -4,29 +4,53 @@ namespace Lieve.Comparison.WebUi.Client.Components.CompareCriteria;
 
 public sealed partial class CompareCriteriaComponent
 {
-    private MudTabs tabs = default!;
-    private MudTabPanel domesticFlightPanel = default!;
-    private MudTabPanel internationalFlightPanel = default!;
-    private MudTabPanel panel03 = default!;
+    private readonly FlightCriteriaEntered _model = new();
+    private MudForm _form = default!;
+    private MudTabs _tabs = default!;
+    private IList<VendorDto> _vendorList = [];
+
+    [Inject]
+    public required IVendorClient VendorClient { get; set; }
 
     [Inject]
     public required NavigationManager NavigationManager { get; set; }
 
-    private IList<VendorDto> _vendorList;
-
-    public async Task HandleOnSearchSubmitted(FlightCriteriaEventArgs args)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        ArgumentNullException.ThrowIfNull(args);
+        if (firstRender)
+        {
+            await SetVendorsAsync();
+            StateHasChanged();
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task SetVendorsAsync()
+    {
+        _vendorList = await VendorClient.GetAsync(ResolveServiceType(), CancellationToken.None);
+    }
+
+    private async Task SubmitAsync()
+    {
+        await _form.Validate();
+
+        if (_form.IsValid is false) return;
+        
+        var a = _vendorList.Any(x => x.IsSelected);
 
         NavigationManager.NavigateTo("");
 
         await Task.CompletedTask;
     }
 
-    private async Task SubmitAsync()
+    private ServiceType ResolveServiceType()
     {
-        NavigationManager.NavigateTo("");
-
-        await Task.CompletedTask;
+        return _tabs.ActivePanelIndex switch
+        {
+            0 => ServiceType.DomesticFlight,
+            1 => ServiceType.InternationalFlight,
+            _ => ServiceType.None,
+        };
     }
 }

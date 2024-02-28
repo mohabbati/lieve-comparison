@@ -1,96 +1,47 @@
 ﻿@rendermode InteractiveAuto
+@using Lieve.Comparison.WebUi.Client.Components.AirportAutocomplete
+@using Lieve.Comparison.WebUi.Client.Components.LieveDateRangePicker
 
-<MudForm Model="@model" @ref="@_form">
-    <MudCardContent>
-        <MudGrid Spacing="1" Justify="Justify.FlexStart">
-            <MudItem xs="6" sm="6" md="3" lg="1">
-                <MudSelect @bind-Value="model.TripType">
-                    @foreach (TripType item in Enum.GetValues(typeof(TripType)))
-                    {
-                        <MudSelectItem Value="@item">@item</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>
-            <MudItem xs="6" sm="6" md="3" lg="1">
-                <MudSelect @bind-Value="model.CabinClass">
-                    @foreach (CabinClass item in Enum.GetValues(typeof(CabinClass)))
-                    {
-                        <MudSelectItem Value="@item">@item</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>
-        </MudGrid>
-        <MudGrid Spacing="1" Justify="Justify.Center">
-            <MudItem xs="12" sm="6" md="6" lg="3">
-                <MudAutocomplete @bind-Value="model.Origin"
-                                 Required
-                                 Validation="@(new Func<KeyValuePair<string, string>, IEnumerable<string>>(Validate))"
-                                 T="KeyValuePair<string, string>"
-                                 ToStringFunc="@(x => x.Value)"
-                                 SearchFuncWithCancel="@AirportLookup"
-                                 Label="Origin"
-                                 Strict="false"
-                                 Immediate="false"
-                                 CoerceText="false"
-                                 CoerceValue="false"
-                                 Variant="Variant.Text"
-                                 ShowProgressIndicator="true" >
-                    <ProgressIndicatorTemplate>
-                        <MudProgressLinear Size="Size.Small" Indeterminate="true" Color="Color.Default" />
-                    </ProgressIndicatorTemplate>
-                </MudAutocomplete>
-            </MudItem>
+<MudCardContent>
+    <MudGrid Spacing="1" Justify="Justify.FlexStart">
+        <MudItem xs="6" sm="6" md="3" lg="1">
+            <MudSelect @bind-Value="_model.TripType">
+                @foreach (TripType item in Enum.GetValues(typeof(TripType)))
+                {
+                    <MudSelectItem Value="@item">@item</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="6" sm="6" md="3" lg="1">
+            <MudSelect @bind-Value="_model.CabinClass">
+                @foreach (CabinClass item in Enum.GetValues(typeof(CabinClass)))
+                {
+                    <MudSelectItem Value="@item">@item</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+    <MudGrid Spacing="1" Justify="Justify.Center">
+        <MudItem xs="12" sm="6" md="6" lg="3">
+            <AirportAutocompleteComponent @bind-Airport="_model.Origin" Label="Origin" SearchFuncWithCancel="@AirportLookup" />
+        </MudItem>
         
-            <MudItem xs="12" sm="6" md="6" lg="3">
-                <MudAutocomplete @bind-Value="model.Destination"
-                                 Required
-                                 Validation="@(new Func<KeyValuePair<string, string>, IEnumerable<string>>(Validate))"
-                                 T="KeyValuePair<string, string>"
-                                 ToStringFunc="@(x => x.Value)"
-                                 SearchFuncWithCancel="@AirportLookup"
-                                 Label="Destination"
-                                 Strict="false"
-                                 Immediate="false"
-                                 CoerceText="false"
-                                 CoerceValue="false"
-                                 Variant="Variant.Text"
-                                 ShowProgressIndicator="true">
-                    <ProgressIndicatorTemplate>
-                        <MudProgressLinear Size="Size.Small" Indeterminate="true" Color="Color.Default" />
-                    </ProgressIndicatorTemplate>
-                </MudAutocomplete>
-            </MudItem>
+        <MudItem xs="12" sm="6" md="6" lg="3">
+            <AirportAutocompleteComponent @bind-Airport="_model.Destination" Label="Destination" SearchFuncWithCancel="@AirportLookup" />
+        </MudItem>
 
-            <MudItem xs="12" sm="12" md="6" lg="3">
-                <MudDateRangePicker @bind-DateRange="model.DateRange"
-                                    @ref="_dateRangePicker"
-                                    Culture="CultureInfo"
-                                    Required
-                                    PickerMonth="lastPicker"
-                                    MinDate="DateTime.Now.AddDays(-1)"
-                                    Label="Date"
-                                    AutoClose="false">
-                    <PickerActions>
-                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => _dateRangePicker.Clear())">Clear</MudButton>
-                        <MudButton Class="mr-auto align-self-start" OnClick="@(ChangeCulture)">Change culture</MudButton>
-                        <MudButton OnClick="@(() => _dateRangePicker.Close(false))">Cancel</MudButton>
-                        <MudButton Color="Color.Primary" OnClick="@(() => _dateRangePicker.Close())">Ok</MudButton>
-                    </PickerActions>
-                </MudDateRangePicker>
-            </MudItem>
+        <MudItem xs="12" sm="12" md="6" lg="3">
+            <LieveDateRangePickerComponent @bind-DateRange="_model.DateRange" />
+        </MudItem>
 
-            <MudItem xs="4" sm="4" md="2" lg="1">
-                <MudNumericField Required @bind-Value="model.Adl" Label="Standard" Variant="Variant.Text" Min="1" Max="9" />
-            </MudItem>
-            <MudItem xs="4" sm="4" md="2" lg="1">
-                <MudNumericField Required @bind-Value="model.Chd" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
-            </MudItem>
-            <MudItem xs="4" sm="4" md="2" lg="1">
-                <MudNumericField Required @bind-Value="model.Inf" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
-            </MudItem>
-        </MudGrid>
-    </MudCardContent>
-</MudForm>
-<MudCardActions>
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await SubmitAsync())">Search & Compare</MudButton>
-</MudCardActions>
+        <MudItem xs="4" sm="4" md="2" lg="1">
+            <MudNumericField Required @bind-Value="_model.Adl" Label="Standard" Variant="Variant.Text" Min="1" Max="9" />
+        </MudItem>
+        <MudItem xs="4" sm="4" md="2" lg="1">
+            <MudNumericField Required @bind-Value="_model.Chd" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
+        </MudItem>
+        <MudItem xs="4" sm="4" md="2" lg="1">
+            <MudNumericField Required @bind-Value="_model.Inf" Label="Standard" Variant="Variant.Text" Min="0" Max="9" />
+        </MudItem>
+    </MudGrid>
+</MudCardContent>

@@ -7,22 +7,23 @@
 <MudPopoverProvider />
 
 <MudRTLProvider RightToLeft="true">
-    <MudTabs @ref="tabs" Outlined="true">
-        <MudTabPanel @ref="domesticFlightPanel" Text="Domestic" Icon="@Icons.Material.Filled.Flight" />
-        <MudTabPanel @ref="internationalFlightPanel" Text="International" Icon="@Icons.Material.Filled.Flight" />
-        @if (tabs.ActivePanelIndex == 0 || tabs.ActivePanelIndex == 1)
+    <MudTabs @ref="_tabs" Outlined="true" ActivePanelIndexChanged="SetVendorsAsync">
+        <MudTabPanel Text="Domestic" Icon="@Icons.Material.Filled.Flight" />
+        <MudTabPanel Text="International" Icon="@Icons.Material.Filled.Flight" />
+        @if (_tabs.ActivePanelIndex == 0 || _tabs.ActivePanelIndex == 1)
         {
             <MudCard>
-                <FlightCriteriaComponent OnSearchSubmitted="HandleOnSearchSubmitted" />
+                <MudForm Model="@_model" @ref="@_form">
+                    <FlightCriteriaComponent />
+                </MudForm>
                 <VendorSelectionComponent Vendors="_vendorList" />
             </MudCard>
             <MudCardActions>
                 <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await SubmitAsync())">Search & Compare</MudButton>
             </MudCardActions>
         }
-        <MudTabPanel @ref="internationalFlightPanel" Text="Hotel" Icon="@Icons.Material.Filled.Hotel">
+        <MudTabPanel Text="Hotel" Icon="@Icons.Material.Filled.Hotel">
             <MudText>Content Hotel</MudText>
         </MudTabPanel>
     </MudTabs>
 </MudRTLProvider>
-
