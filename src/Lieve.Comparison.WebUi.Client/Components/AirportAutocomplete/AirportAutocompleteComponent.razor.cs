@@ -2,8 +2,19 @@
 
 public partial class AirportAutocompleteComponent
 {
+    private KeyValuePair<string, string> _airport;
+
     [Parameter]
-    public KeyValuePair<string, string> Airport { get; set; } = default!;
+    public KeyValuePair<string, string> Airport
+    {
+        get => _airport;
+        set
+        {
+            if (value.Key == _airport.Key && value.Value == _airport.Value) return;
+            _airport = value;
+            _ = AirportChanged.InvokeAsync(value);
+        }
+    }
 
     [Parameter]
     public EventCallback<KeyValuePair<string, string>> AirportChanged { get; set; }

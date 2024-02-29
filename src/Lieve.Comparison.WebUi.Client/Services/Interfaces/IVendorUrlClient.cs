@@ -7,11 +7,11 @@ public interface IVendorUrlClient
         ServiceType serviceType,
         string from,
         string to,
-        DateTimeOffset departureDate,
-        DateTimeOffset? returnDate,
-        short adl,
-        short chd,
-        short inf,
+        DateTime departureDate,
+        DateTime? returnDate,
+        int adl,
+        int chd,
+        int inf,
         CabinClass? cabinClass,
         CancellationToken cancellationToken = default);
 }

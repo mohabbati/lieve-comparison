@@ -32,7 +32,7 @@ public static class AlibabaUrlGenerator
             url = url.Replace("&returning=[YYYY-MM-DD?]", "");
         }
 
-        if (request.CabinClass is not null)
+        if (request.CabinClass is not null && request.CabinClass != CabinClass.Economy)
         {
             url = url.Replace("[CABINCLASS?]", request.CabinClass.ToString());
         }

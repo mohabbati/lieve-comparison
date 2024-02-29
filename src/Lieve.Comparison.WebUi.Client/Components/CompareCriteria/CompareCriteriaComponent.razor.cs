@@ -9,11 +9,13 @@ public sealed partial class CompareCriteriaComponent
     private Flight _flight = new();
     private IList<VendorDto> _vendors = [];
 
-    [Inject]
-    public required IVendorClient VendorClient { get; set; }
+    [Inject] public required IVendorClient VendorClient { get; set; }
 
-    [Inject]
-    public required NavigationManager NavigationManager { get; set; }
+    [Inject] public required IVendorUrlClient VendorUrlClient { get; set; }
+
+    [Inject] public required NavigationManager NavigationManager { get; set; }
+
+    [Inject] private IDialogService DialogService { get; set; } = default!;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -31,10 +33,26 @@ public sealed partial class CompareCriteriaComponent
         await _flightForm.Validate();
 
         if (_flightForm.IsValid is false) return;
-        
-        var a = _vendors.Any(x => x.IsSelected);
 
-        NavigationManager.NavigateTo("");
+        var selectedVendors = _vendors.Where(x => x.IsSelected).ToList();
+
+        if (selectedVendors.Count == 0)
+        {
+            bool? result = await DialogService.ShowMessageBox(
+                "Warning",
+                "1 to 4 vendors should be selected!",
+                options: new DialogOptions()
+                { Position = DialogPosition.Center }
+                );
+
+            return;
+        }
+
+        var vendorUrls = await VendorUrlClient.GetAsync(
+            selectedVendors.Select(x => x.Name).ToArray(), ResolveServiceType(), _flight.Origin.Key, _flight.Destination.Key, _flight.DateRange.Start!.Value, null, _flight.Adl, _flight.Chd, _flight.Inf, _flight.CabinClass);
+
+        var c = vendorUrls.Select(x => x.NavigationUrl).FirstOrDefault()!;
+        NavigationManager.NavigateTo(c);
 
         await Task.CompletedTask;
     }

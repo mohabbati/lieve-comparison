@@ -4,8 +4,19 @@ namespace Lieve.Comparison.WebUi.Client.Components.LieveDateRangePicker;
 
 public partial class LieveDateRangePickerComponent
 {
+    private DateRange _dateRange = default!;
+
     [Parameter]
-    public DateRange DateRange { get; set; } = default!;
+    public DateRange DateRange
+    {
+        get => _dateRange;
+        set
+        {
+            if (value == _dateRange) return;
+            _dateRange = value;
+            _ = DateRangeChanged.InvokeAsync(value);
+        }
+    }
 
     [Parameter]
     public EventCallback<DateRange> DateRangeChanged { get; set; }

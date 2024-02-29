@@ -16,19 +16,19 @@ public class VendorUrlClient : IVendorUrlClient
         ServiceType serviceType,
         string from,
         string to,
-        DateTimeOffset departureDate,
-        DateTimeOffset? returnDate,
-        short adl,
-        short chd,
-        short inf,
+        DateTime departureDate,
+        DateTime? returnDate,
+        int adl,
+        int chd,
+        int inf,
         CabinClass? cabinClass,
         CancellationToken cancellationToken = default)
     {
         var vendorQuery = $"vendors={string.Join("&vendors=", vendors)}";
-        var returnDateQuery = returnDate.HasValue ? $"&returnDate={returnDate.Value:o}" : "";
-        var cabinClassQuery = cabinClass.HasValue ? $"&cabinClass={cabinClass.Value}" : "";
+        var returnDateQuery = "";// returnDate is not null ? $"&returnDate={returnDate.Value:o}" : "";
+        var cabinClassQuery = cabinClass is not null ? $"&cabinClass={cabinClass.Value}" : "";
 
-        var url = $"api/vendor?{vendorQuery}&serviceType={serviceType}&from={from}&to={to}&departureDate={departureDate:o}{returnDateQuery}&adl={adl}&chd={chd}&inf={inf}{cabinClassQuery}";
+        var url = $"api/vendorurl?{vendorQuery}&serviceType={serviceType}&from={from}&to={to}&departureDate={departureDate:o}{returnDateQuery}&adl={adl}&chd={chd}&inf={inf}{cabinClassQuery}";
 
         var response = await _httpClient.GetFromJsonAsync<IList<VendorUrlDto>>(url, cancellationToken);
 

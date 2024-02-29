@@ -5,6 +5,7 @@
 
 <MudThemeProvider />
 <MudPopoverProvider />
+<MudDialogProvider />
 
 <MudRTLProvider RightToLeft="true">
     <MudTabs @ref="_tabs" Outlined="true" ActivePanelIndexChanged="SetVendorsAsync">
@@ -14,7 +15,7 @@
         {
             <MudCard>
                 <MudForm Model="@_flight" @ref="@_flightForm">
-                    <FlightCriteriaComponent Flight="_flight" />
+                    <FlightCriteriaComponent ServiceType="ResolveServiceType()" Flight=" _flight" />
                 </MudForm>
                 <VendorSelectionComponent Vendors="_vendors" />
             </MudCard>
