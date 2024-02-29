@@ -6,7 +6,7 @@ public sealed partial class CompareCriteriaComponent
 {
     private MudTabs _tabs = default!;
     private MudForm _flightForm = default!;
-    private Flight _flight = new();
+    private readonly Flight _flight = new();
     private IList<VendorDto> _vendors = [];
 
     [Inject] public required IVendorClient VendorClient { get; set; }
@@ -15,7 +15,7 @@ public sealed partial class CompareCriteriaComponent
 
     [Inject] public required NavigationManager NavigationManager { get; set; }
 
-    [Inject] private IDialogService DialogService { get; set; } = default!;
+    [Inject] public required IDialogService DialogService { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -42,14 +42,22 @@ public sealed partial class CompareCriteriaComponent
                 "Warning",
                 "1 to 4 vendors should be selected!",
                 options: new DialogOptions()
-                { Position = DialogPosition.Center }
-                );
+                { Position = DialogPosition.Center });
 
             return;
         }
 
         var vendorUrls = await VendorUrlClient.GetAsync(
-            selectedVendors.Select(x => x.Name).ToArray(), ResolveServiceType(), _flight.Origin.Key, _flight.Destination.Key, _flight.DateRange.Start!.Value, null, _flight.Adl, _flight.Chd, _flight.Inf, _flight.CabinClass);
+            selectedVendors.Select(x => x.Name).ToArray(),
+            ResolveServiceType(),
+            _flight.Origin.Key,
+            _flight.Destination.Key,
+            _flight.DateRange.Start!.Value,
+            null,
+            _flight.Adl,
+            _flight.Chd,
+            _flight.Inf,
+            _flight.CabinClass);
 
         var c = vendorUrls.Select(x => x.NavigationUrl).FirstOrDefault()!;
         NavigationManager.NavigateTo(c);

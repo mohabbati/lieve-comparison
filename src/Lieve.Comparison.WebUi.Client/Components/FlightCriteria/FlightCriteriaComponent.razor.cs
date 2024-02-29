@@ -3,15 +3,14 @@
 public partial class FlightCriteriaComponent
 {
     [Parameter]
-    public ServiceType ServiceType { get; set; }
+    public required ServiceType ServiceType { get; set; }
 
     [Parameter]
     public Flight Flight { get; set; } = new();
 
     private readonly DeBouncer deBouncer = new(TimeSpan.FromMilliseconds(300));
 
-    [Inject]
-    public required IAirportClient AirportClient { get; set; }
+    [Inject] public required IAirportClient AirportClient { get; set; }
 
     private async Task<IEnumerable<KeyValuePair<string, string>>> AirportLookup(string input, CancellationToken cancellationToken)
     {
