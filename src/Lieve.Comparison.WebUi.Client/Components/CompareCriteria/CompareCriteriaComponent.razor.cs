@@ -1,4 +1,5 @@
 ﻿using Lieve.Comparison.WebUi.Client.Models;
+using Lieve.Comparison.WebUi.Client.Services.Implementations;
 
 namespace Lieve.Comparison.WebUi.Client.Components.CompareCriteria;
 
@@ -10,12 +11,10 @@ public sealed partial class CompareCriteriaComponent
     private IList<VendorDto> _vendors = [];
 
     [Inject] public required IVendorClient VendorClient { get; set; }
-
     [Inject] public required IVendorUrlClient VendorUrlClient { get; set; }
-
     [Inject] public required NavigationManager NavigationManager { get; set; }
-
     [Inject] public required IDialogService DialogService { get; set; }
+    [Inject] public required IComparableVendor ComparableVendor { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -59,8 +58,10 @@ public sealed partial class CompareCriteriaComponent
             _flight.Inf,
             _flight.CabinClass);
 
-        var c = vendorUrls.Select(x => x.NavigationUrl).FirstOrDefault()!;
-        NavigationManager.NavigateTo(c);
+        ComparableVendor.Clear();
+        ComparableVendor.AddRange(vendorUrls);
+        
+        NavigationManager.NavigateTo("compare");
 
         await Task.CompletedTask;
     }

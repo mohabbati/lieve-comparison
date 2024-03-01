@@ -2,7 +2,7 @@
 
 namespace Lieve.Comparison.WebUi.Client.Services.Implementations;
 
-public class AirportClient : IAirportClient
+public sealed class AirportClient : IAirportClient
 {
     private readonly HttpClient _httpClient;
 

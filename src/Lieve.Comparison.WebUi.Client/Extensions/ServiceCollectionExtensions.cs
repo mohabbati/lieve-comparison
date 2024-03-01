@@ -9,6 +9,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddLieveHttpClients(new Uri(configuration.GetSection("HostedUrl").Value!));
         services.AddMudServices(x => x.PopoverOptions.ThrowOnDuplicateProvider = false);
+        services.AddSingleton<IComparableVendor, ComparableVendor>();
 
         return services;
     }

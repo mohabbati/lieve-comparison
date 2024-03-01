@@ -2,7 +2,7 @@
 
 namespace Lieve.Comparison.WebUi.Client.Services.Implementations;
 
-public class VendorUrlClient : IVendorUrlClient
+public sealed class VendorUrlClient : IVendorUrlClient
 {
     private readonly HttpClient _httpClient;
 

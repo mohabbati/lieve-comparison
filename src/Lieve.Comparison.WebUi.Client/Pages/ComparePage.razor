@@ -1,0 +1,16 @@
+﻿@page "/compare"
+
+@rendermode InteractiveAuto
+
+<MudThemeProvider />
+
+<MudRTLProvider RightToLeft="true">
+    <MudTabs @ref="_tabs" Outlined="true" KeepPanelsAlive="true">
+        @foreach (var item in ComparableVendor.VendorUrls)
+        {
+            <MudTabPanel Text="@item.Name">
+                <iframe src="@item.NavigationUrl" style="width:100%; height:100vh;"></iframe>
+            </MudTabPanel>
+        }
+    </MudTabs>
+</MudRTLProvider>
