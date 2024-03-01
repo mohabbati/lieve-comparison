@@ -2,32 +2,34 @@
 
 public partial class AirportAutocompleteComponent
 {
-    private KeyValuePair<string, string> _airport;
+    private AirportDto? _airport;
 
     [Parameter]
-    public required KeyValuePair<string, string> Airport
+    public required AirportDto? Airport
     {
         get => _airport;
         set
         {
-            if (value.Key == _airport.Key && value.Value == _airport.Value) return;
+            if (value?.IataCode == _airport?.IataCode && value?.Name == _airport?.Name &&
+                value?.CityName == _airport?.CityName && value?.CountryName == _airport?.CountryName) return;
+
             _airport = value;
             _ = AirportChanged.InvokeAsync(value);
         }
     }
 
     [Parameter]
-    public EventCallback<KeyValuePair<string, string>> AirportChanged { get; set; }
+    public EventCallback<AirportDto> AirportChanged { get; set; }
 
     [Parameter]
     public string Label { get; set; } = default!;
 
     [Parameter]
-    public required Func<string, CancellationToken, Task<IEnumerable<KeyValuePair<string, string>>>> SearchFuncWithCancel { get; set; }
+    public required Func<string, CancellationToken, Task<IEnumerable<AirportDto>>> SearchFuncWithCancel { get; set; }
 
-    private static IEnumerable<string> Validate(KeyValuePair<string, string> value)
+    private static IEnumerable<string> Validate(AirportDto airport)
     {
-        if (string.IsNullOrWhiteSpace(value.Key) || string.IsNullOrWhiteSpace(value.Value))
+        if (string.IsNullOrWhiteSpace(airport.IataCode))
         {
             yield return "The State field is required";
         }

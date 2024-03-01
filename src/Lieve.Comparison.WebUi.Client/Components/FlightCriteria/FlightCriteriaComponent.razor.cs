@@ -1,4 +1,6 @@
-﻿namespace Lieve.Comparison.WebUi.Client.Components.FlightCriteria;
+﻿using Lieve.Comparison.WebUi.Client.Models;
+
+namespace Lieve.Comparison.WebUi.Client.Components.FlightCriteria;
 
 public partial class FlightCriteriaComponent
 {
@@ -12,15 +14,13 @@ public partial class FlightCriteriaComponent
 
     [Inject] public required IAirportClient AirportClient { get; set; }
 
-    private async Task<IEnumerable<KeyValuePair<string, string>>> AirportLookup(string input, CancellationToken cancellationToken)
+    private async Task<IEnumerable<AirportDto>> AirportLookup(string input, CancellationToken cancellationToken)
     {
-        var result = await deBouncer.Debounce<IEnumerable<KeyValuePair<string, string>>>(async () =>
+        var result = await deBouncer.Debounce<IEnumerable<AirportDto>>(async () =>
         {
             var airports = await AirportClient.GetAsync(ResolveLocalityType(), input ?? string.Empty, cancellationToken);
 
-            var keyValuePairs = airports.Select(x => new KeyValuePair<string, string>(x.IataCode, $"{x.CountryName} - {x.CityName}")).ToList();
-
-            return keyValuePairs;
+            return airports;
         });
         
         return result;

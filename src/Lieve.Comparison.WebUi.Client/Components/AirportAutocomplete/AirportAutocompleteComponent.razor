@@ -1,8 +1,8 @@
 ﻿<MudAutocomplete @bind-Value="Airport"
                  Required
-                 Validation="@(new Func<KeyValuePair<string, string>, IEnumerable<string>>(Validate))"
-                 T="KeyValuePair<string, string>"
-                 ToStringFunc="@(airport => airport.Value)"
+                 Validation="@(new Func<AirportDto, IEnumerable<string>>(Validate))"
+                 T="AirportDto"
+                 ToStringFunc="@(airport => airport?.Name)"
                  SearchFuncWithCancel="@SearchFuncWithCancel"
                  Label="@Label"
                  Strict="false"
@@ -17,10 +17,10 @@
     <ItemTemplate Context="airport">
         <MudGrid Spacing="1" Justify="Justify.SpaceBetween">
             <MudItem>
-                <MudField Variant="Variant.Text">@airport.Key</MudField>
+                <MudField Variant="Variant.Text">@airport.IataCode</MudField>
             </MudItem>
             <MudItem>
-                <MudField Label="@airport.Value">@airport.Value</MudField>
+                <MudField Label="@airport.CountryName">@airport.Name</MudField>
             </MudItem>
         </MudGrid>
     </ItemTemplate>

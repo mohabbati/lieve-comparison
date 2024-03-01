@@ -1,4 +1,4 @@
-﻿using Lieve.Comparison.WebUi.Client.Components.FlightCriteria;
+﻿using Lieve.Comparison.WebUi.Client.Models;
 
 namespace Lieve.Comparison.WebUi.Client.Components.CompareCriteria;
 
@@ -50,8 +50,8 @@ public sealed partial class CompareCriteriaComponent
         var vendorUrls = await VendorUrlClient.GetAsync(
             selectedVendors.Select(x => x.Name).ToArray(),
             ResolveServiceType(),
-            _flight.Origin.Key,
-            _flight.Destination.Key,
+            _flight.Origin.IataCode,
+            _flight.Destination.IataCode,
             _flight.DateRange.Start!.Value,
             null,
             _flight.Adl,

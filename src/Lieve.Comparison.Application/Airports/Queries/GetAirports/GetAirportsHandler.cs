@@ -61,7 +61,7 @@ public sealed class GetAirportsHandler : IRequestHandler<GetAirports.Request, Ge
             new AirportDto
             {
                 IataCode = airport.IataCode,
-                Name = airport.Name,
+                Name = airport.DisplayNames.FirstOrDefault(x => x.Language == "fa-IR")!.Value,
                 CityName = airport.City.DisplayNames.FirstOrDefault(x => x.Language == "fa-IR")!.Value,
                 CountryName = airport.City.Country.DisplayNames.FirstOrDefault(x => x.Language == "fa-IR")!.Value
             }
