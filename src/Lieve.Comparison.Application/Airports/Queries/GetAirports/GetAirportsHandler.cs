@@ -15,11 +15,10 @@ public sealed class GetAirportsHandler : IRequestHandler<GetAirports.Request, Ge
 
     public async Task<GetAirports.Response> Handle(GetAirports.Request request, CancellationToken cancellationToken)
     {
-        const int iranCode = 101061;
-        const int ikaCode = 12000321;
+        if (request.LocalityType == LocalityType.None)
+            return new GetAirports.Response([]);
 
-        var filterBuilder = Builders<Airport>.Filter;
-        var filter = string.IsNullOrWhiteSpace(request.Clause)
+        var clauseFilter = string.IsNullOrWhiteSpace(request.Clause)
             ? Builders<Airport>.Filter.Eq(x => x.IsPopular, true)
             : Builders<Airport>.Filter.Or(
             Builders<Airport>.Filter.Regex(x => x.IataCode, new BsonRegularExpression(request.Clause, "i")),
@@ -28,16 +27,18 @@ public sealed class GetAirportsHandler : IRequestHandler<GetAirports.Request, Ge
             Builders<Airport>.Filter.Regex(x => x.City.Country.DisplayNames.Select(s => s.Value), new BsonRegularExpression(request.Clause, "i"))
         );
 
-        filter &= request.LocalityType switch
+        var localityFilter = request.LocalityType switch
         {
-            LocalityType.Domestic => filterBuilder
-                .Or(Builders<Airport>.Filter.Eq(x => x.City.Country.Code, iranCode),
-                    Builders<Airport>.Filter.Ne(x => x.Code, ikaCode)),
-            LocalityType.International => filterBuilder
-                .Or(Builders<Airport>.Filter.Ne(x => x.City.Country.Code, iranCode),
-                    Builders<Airport>.Filter.Eq(x => x.Code, ikaCode)),
-            _ => filterBuilder.Empty
+            LocalityType.Domestic => Builders<Airport>.Filter.And(
+                Builders<Airport>.Filter.Eq(x => x.City.Country.DomainCode, "IRN"),
+                Builders<Airport>.Filter.Ne(x => x.DomainCode, "IKA")),
+            LocalityType.International => Builders<Airport>.Filter.Or(
+                Builders<Airport>.Filter.Ne(x => x.City.Country.DomainCode, "IRN"),
+                Builders<Airport>.Filter.Eq(x => x.DomainCode, "IKA")),
+            _ => Builders<Airport>.Filter.Empty
         };
+
+        var filter = Builders<Airport>.Filter.And(clauseFilter, localityFilter);
 
         var airports = await _dbContext.Airports
             .Find(filter)
