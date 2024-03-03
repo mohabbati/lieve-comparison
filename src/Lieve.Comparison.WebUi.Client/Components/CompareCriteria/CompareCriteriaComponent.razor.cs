@@ -1,5 +1,4 @@
 ﻿using Lieve.Comparison.WebUi.Client.Models;
-using Lieve.Comparison.WebUi.Client.Services.Implementations;
 
 namespace Lieve.Comparison.WebUi.Client.Components.CompareCriteria;
 
@@ -35,7 +34,7 @@ public sealed partial class CompareCriteriaComponent
 
         var selectedVendors = _vendors.Where(x => x.IsSelected).ToList();
 
-        if (selectedVendors.Count == 0)
+        if (selectedVendors.Count < 1 || selectedVendors.Count > 4)
         {
             bool? result = await DialogService.ShowMessageBox(
                 "Warning",
