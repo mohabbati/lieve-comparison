@@ -1,8 +1,10 @@
 ﻿<MudDateRangePicker @bind-DateRange="DateRange"
-                    @ref="_dateRangePicker"
-                    Culture="_cultureInfo"
+                    @ref="@_dateRangePicker"
+                    Culture="@_cultureInfo"
                     Required
-                    PickerMonth="lastPicker"
+                    PickerMonth="@_lastPicker"
+                    DateFormat="yyyy/MM/dd"
+                    TitleDateFormat="@_titleDateFormat"
                     MinDate="DateTime.Now.AddDays(-1)"
                     Label="Date"
     AutoClose="false">
