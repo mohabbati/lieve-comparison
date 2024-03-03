@@ -29,9 +29,9 @@ public partial class AirportAutocompleteComponent
 
     private static IEnumerable<string> Validate(AirportDto airport)
     {
-        if (string.IsNullOrWhiteSpace(airport.IataCode))
+        if (airport is null || string.IsNullOrWhiteSpace(airport.IataCode))
         {
-            yield return "The State field is required";
+            yield return "Required";
         }
     }
 }
