@@ -38,7 +38,9 @@ public sealed class GetVendorUrlsHandler : IRequestHandler<GetVendorUrls.Request
             vendorUrlDtos.Add(new VendorUrlDto
             {
                 Name = vendor.Name,
-                NavigationUrl = url
+                NavigationUrl = url,
+                LogoUri = vendor.LogoUri,
+                FavIconUri = vendor.FavIconUri,
             });
         }
 

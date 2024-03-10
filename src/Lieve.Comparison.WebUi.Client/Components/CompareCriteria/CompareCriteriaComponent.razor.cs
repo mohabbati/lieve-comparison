@@ -59,7 +59,7 @@ public sealed partial class CompareCriteriaComponent
 
         ComparableVendor.Clear();
         ComparableVendor.AddRange(vendorUrls);
-        
+
         NavigationManager.NavigateTo("compare");
 
         await Task.CompletedTask;

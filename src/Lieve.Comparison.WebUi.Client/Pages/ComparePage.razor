@@ -8,7 +8,7 @@
     <MudTabs @ref="_tabs" Outlined="true" KeepPanelsAlive="true">
         @foreach (var item in ComparableVendor.VendorUrls)
         {
-            <MudTabPanel Text="@item.Name">
+            <MudTabPanel Text="@item.Name" Icon="@SanetizeFavIconUrl(item.FavIconUri)">
                 <iframe src="@item.NavigationUrl" style="width:100%; height:100vh;"></iframe>
             </MudTabPanel>
         }
