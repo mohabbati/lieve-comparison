@@ -7,6 +7,8 @@ public abstract class GetVendorUrls
         ServiceType ServiceType,
         string From,
         string To,
+        string FromCity,
+        string ToCity,
         DateTime DepartureDate,
         DateTime? ReturnDate,
         short Adl,

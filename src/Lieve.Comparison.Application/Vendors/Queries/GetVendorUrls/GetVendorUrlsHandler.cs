@@ -35,6 +35,8 @@ public sealed class GetVendorUrlsHandler : IRequestHandler<GetVendorUrls.Request
             if (uriTemplate is null) continue;
             var url = strategy(request, vendor.BaseUrl, uriTemplate);
 
+            if (url.Contains('[')) continue;
+
             vendorUrlDtos.Add(new VendorUrlDto
             {
                 Name = vendor.Name,

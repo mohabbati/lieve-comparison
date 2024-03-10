@@ -50,6 +50,8 @@ public sealed partial class CompareCriteriaComponent
             ResolveServiceType(),
             _flight.Origin.IataCode,
             _flight.Destination.IataCode,
+            _flight.Origin.CityName,
+            _flight.Destination.CityName,
             _flight.DateRange.Start!.Value,
             null,
             _flight.Adl,

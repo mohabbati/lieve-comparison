@@ -16,6 +16,8 @@ public sealed class VendorUrlClient : IVendorUrlClient
         ServiceType serviceType,
         string from,
         string to,
+        string fromCity,
+        string toCity,
         DateTime departureDate,
         DateTime? returnDate,
         int adl,
@@ -28,7 +30,7 @@ public sealed class VendorUrlClient : IVendorUrlClient
         var returnDateQuery = "";// returnDate is not null ? $"&returnDate={returnDate.Value:o}" : "";
         var cabinClassQuery = cabinClass is not null ? $"&cabinClass={cabinClass.Value}" : "";
 
-        var url = $"api/vendorurl?{vendorQuery}&serviceType={serviceType}&from={from}&to={to}&departureDate={departureDate:o}{returnDateQuery}&adl={adl}&chd={chd}&inf={inf}{cabinClassQuery}";
+        var url = $"api/vendorurl?{vendorQuery}&serviceType={serviceType}&from={from}&to={to}&fromCity={fromCity}&toCity={toCity}&departureDate={departureDate:o}{returnDateQuery}&adl={adl}&chd={chd}&inf={inf}{cabinClassQuery}";
 
         var response = await _httpClient.GetFromJsonAsync<IList<VendorUrlDto>>(url, cancellationToken);
 

@@ -7,6 +7,8 @@ public interface IVendorUrlClient
         ServiceType serviceType,
         string from,
         string to,
+        string fromCity,
+        string toCity,
         DateTime departureDate,
         DateTime? returnDate,
         int adl,

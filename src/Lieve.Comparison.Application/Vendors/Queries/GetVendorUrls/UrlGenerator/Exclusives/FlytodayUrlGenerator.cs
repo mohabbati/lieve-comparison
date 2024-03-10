@@ -22,14 +22,9 @@ public static class FlytodayUrlGenerator
             .Replace("[YYYY-MM-DD]", request.DepartureDate.ToString("yyyy-MM-dd"))
             .Replace("[CABINCLASS]", GetCabinClass(request.CabinClass));
 
-        if (request.ReturnDate is not null)
-        {
-            url = url.Replace("[YYYY-MM-DD?]", request.ReturnDate.Value.ToString("yyyy-MM-dd"));
-        }
-        else
-        {
-            url = url.Replace("&returnDate=[YYYY-MM-DD?]", "");
-        }
+        url = request.ReturnDate is not null
+            ? url.Replace("[YYYY-MM-DD?]", request.ReturnDate.Value.ToString("yyyy-MM-dd"))
+            : HttpHelper.RemoveParameter(url, "[YYYY-MM-DD?]");
 
         return $"{baseUrl}{url}";
     }
